@@ -2,6 +2,8 @@ package com.jtechy.spring.dao;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
@@ -29,9 +31,16 @@ public class PersonDAOImpl implements PersonDAO {
 	}
 
 	@Override
+	@Transactional
 	public void updatePerson(Person p) {
 		Session session = this.sessionFactory.getCurrentSession();
+		
 		session.update(p);
+		
+		//p.setCountry("India");
+		//p.setName(null);
+		
+		//session.update(p);
 		logger.error("Person updated successfully, Person Details="+p);
 	}
 
